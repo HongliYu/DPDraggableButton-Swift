@@ -13,13 +13,13 @@ Pod::Spec.new do |s|
   s.summary      = "Draggable Button"
 
   s.description  = <<-DESC
-                    Drag or tap the button to trigger Gesture event  
+                    Drag or tap the button to trigger gesture event  
                     DESC
 
   s.homepage     = "https://github.com/HongliYu/DPDraggableButton-Swift"
   s.license      = "MIT"
   s.author       = { "HongliYu" => "yhlssdone@gmail.com" }
-  s.source       = { :git => "https://github.com/HongliYu/DPDraggableButton-Swift.git" }
+  s.source       = { :git => "https://github.com/HongliYu/DPDraggableButton-Swift.git", :tag => "0.0.1" }
 
   s.platform     = :ios, "9.0"
   s.requires_arc = true
