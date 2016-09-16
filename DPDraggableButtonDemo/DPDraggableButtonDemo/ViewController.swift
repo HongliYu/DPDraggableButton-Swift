@@ -17,18 +17,18 @@ class ViewController: UIViewController {
   var logInfo: String = "Log:"
   var draggableButton: DPDraggableButton!
 
-  override func viewDidAppear(animated: Bool) {
+  override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    UIApplication.sharedApplication().keyWindow?.bringSubviewToFront(self.draggableButton)
+    UIApplication.shared.keyWindow?.bringSubview(toFront: self.draggableButton)
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.draggableButton = DPDraggableButton.init(frame: CGRectMake(0, 120, 100, 40),
-                                                  draggableButtonType: .DPDraggableRect)
-    self.draggableButton.backgroundColor = UIColor.grayColor()
-    self.draggableButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-    self.draggableButton.setTitle("drag me", forState: .Normal)
+    self.draggableButton = DPDraggableButton.init(frame: CGRect(x: 0, y: 120, width: 100, height: 40),
+                                                  draggableButtonType: .dpDraggableRect)
+    self.draggableButton.backgroundColor = UIColor.gray
+    self.draggableButton.setTitleColor(UIColor.white, for: UIControlState())
+    self.draggableButton.setTitle("drag me", for: UIControlState())
     
     self.draggableButton.tapBlock = {
       [weak self] in
@@ -80,13 +80,13 @@ class ViewController: UIViewController {
     }
   }
   
-  @IBAction func cleanLogs(sender: AnyObject) {
+  @IBAction func cleanLogs(_ sender: AnyObject) {
     self.logInfo = "Log: "
     self.consoleLabel.text = self.logInfo
   }
 
-  func refreshLog(logInfo: String) {
-    if logSwitch.on {
+  func refreshLog(_ logInfo: String) {
+    if logSwitch.isOn {
       self.logInfo += logInfo
       self.consoleLabel.text = self.logInfo
     }
