@@ -10,29 +10,44 @@ Drag or tap the button to trigger Gesture event
 
 ```  swift
     draggableButton.tapBlock = {
-        print("[single tap]")
+      [weak self] in
+      guard let strongSelf = self else { return }
+      strongSelf.refreshLog("[single tap]")
     }
     
     draggableButton.doubleTapBlock = {
-        print("[double tap]")
+      [weak self] in
+      guard let strongSelf = self else { return }
+      strongSelf.refreshLog("[double tap]")
     }
     
     draggableButton.longPressBlock = {
-        print("[longpress]")
+      [weak self] in
+      guard let strongSelf = self else { return }
+      strongSelf.refreshLog("[longpress]")
     }
     
     draggableButton.draggingBlock = {
-        print("[dragging]")
+      [weak self] in
+      guard let strongSelf = self else { return }
+      strongSelf.refreshLog("[dragging]")
     }
     
     draggableButton.dragDoneBlock = {
-        print("[drag done]")
+      [weak self] in
+      guard let strongSelf = self else { return }
+      strongSelf.refreshLog("[drag done]")
     }
     
     draggableButton.autoDockingBlock = {
-        print("[auto docking]")
+      [weak self] in
+      guard let strongSelf = self else { return }
+      strongSelf.refreshLog("[auto docking]")
     }
     
     draggableButton.autoDockingDoneBlock = {
-        print("[auto docking done]")
+      [weak self] in
+      guard let strongSelf = self else { return }
+      strongSelf.refreshLog("[auto docking done]")
     }
+
