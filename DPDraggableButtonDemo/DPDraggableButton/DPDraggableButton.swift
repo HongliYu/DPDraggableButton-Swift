@@ -18,16 +18,16 @@ let kDPDoubleTapTimeInterval: Double = 0.36
 
 open class DPDraggableButton: UIButton {
   
-  var draggable: Bool = true
-  var dragging: Bool = false
-  var autoDocking: Bool = true
-  var singleTapBeenCanceled: Bool = false
-  var draggableButtonType: DPDraggableButtonType = .rect
+  open var draggable: Bool = true
+  open var dragging: Bool = false
+  open var autoDocking: Bool = true
+  open var singleTapBeenCanceled: Bool = false
+  open var draggableButtonType: DPDraggableButtonType = .rect
   
-  var beginLocation: CGPoint?
-  var longPressGestureRecognizer: UILongPressGestureRecognizer?
+  open var beginLocation: CGPoint?
+  open var longPressGestureRecognizer: UILongPressGestureRecognizer?
   
-  var tapBlock:(()->Void)? {
+  open var tapBlock:(()->Void)? {
     set(tapBlock) {
       if let aTapBlock = tapBlock {
         self.tapBlockStored = aTapBlock
@@ -40,12 +40,12 @@ open class DPDraggableButton: UIButton {
   }
   private var tapBlockStored:(()->Void)?
   
-  var doubleTapBlock:(()->Void)?
-  var longPressBlock:(()->Void)?
-  var draggingBlock:(()->Void)?
-  var dragDoneBlock:(()->Void)?
-  var autoDockingBlock:(()->Void)?
-  var autoDockingDoneBlock:(()->Void)?
+  open var doubleTapBlock:(()->Void)?
+  open var longPressBlock:(()->Void)?
+  open var draggingBlock:(()->Void)?
+  open var dragDoneBlock:(()->Void)?
+  open var autoDockingBlock:(()->Void)?
+  open var autoDockingDoneBlock:(()->Void)?
   
   required public init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
@@ -218,14 +218,14 @@ open class DPDraggableButton: UIButton {
   }
   
   // MARK: Remove
-  class func removeAllFromKeyWindow() {
+  open class func removeAllFromKeyWindow() {
     guard let subviews = UIApplication.shared.keyWindow?.subviews else { return }
     for case let button as DPDraggableButton in subviews {
       button.removeFromSuperview()
     }
   }
   
-  class func removeAllFromView(_ superView : AnyObject) {
+  open class func removeAllFromView(_ superView : AnyObject) {
     guard let subviews = superView.subviews else { return }
     for case let button as DPDraggableButton in subviews {
       button.removeFromSuperview()

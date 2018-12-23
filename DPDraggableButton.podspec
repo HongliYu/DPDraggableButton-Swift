@@ -23,7 +23,7 @@ Pod::Spec.new do |s|
 
   s.platform     = :ios, "10.0"
   s.requires_arc = true
-  s.source_files = "DPDraggableButtonDemo/DPDraggableButtonDemo/DPDraggableButton/*.swift"  
+  s.source_files = "DPDraggableButtonDemo/DPDraggableButton/*.swift"  
   s.frameworks   = 'UIKit', 'Foundation'
   s.module_name  = 'DPDraggableButton'
   s.swift_version = "4.2"
