@@ -6,69 +6,39 @@
 //  Copyright © 2016 Hongli Yu. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
-}
-
-fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l > r
-  default:
-    return rhs < lhs
-  }
-}
-
 public enum DPDraggableButtonType {
-  case dpDraggableRect
-  case dpDraggableRound
-  var description: String {
-    switch self {
-    case .dpDraggableRect:
-      return "DPDraggableRect"
-    case .dpDraggableRound:
-      return "DPDraggableRound"
-    }
-  }
+  case rect
+  case round
 }
 
 let kDPAutoDockingDuration: Double = 0.2
 let kDPDoubleTapTimeInterval: Double = 0.36
 
 open class DPDraggableButton: UIButton {
+  
   var draggable: Bool = true
   var dragging: Bool = false
   var autoDocking: Bool = true
   var singleTapBeenCanceled: Bool = false
-  var draggableButtonType: DPDraggableButtonType = .dpDraggableRect
+  var draggableButtonType: DPDraggableButtonType = .rect
   
   var beginLocation: CGPoint?
   var longPressGestureRecognizer: UILongPressGestureRecognizer?
   
-  // actions call back
-  var tapBlock:(()->Void)? { // computed
+  var tapBlock:(()->Void)? {
     set(tapBlock) {
       if let aTapBlock = tapBlock {
         self.tapBlockStored = aTapBlock
-        self.addTarget(self, action: #selector(tapAction(_:)),
-                       for: .touchUpInside)
+        self.addTarget(self, action: #selector(tapAction(_:)), for: .touchUpInside)
       }
     }
     get {
       return self.tapBlockStored!
     }
   }
-  fileprivate var tapBlockStored:(()->Void)?
+  private var tapBlockStored:(()->Void)?
   
   var doubleTapBlock:(()->Void)?
   var longPressBlock:(()->Void)?
@@ -78,15 +48,15 @@ open class DPDraggableButton: UIButton {
   var autoDockingDoneBlock:(()->Void)?
   
   required public init?(coder aDecoder: NSCoder) {
-    super.init(coder: aDecoder)!
-    self.translatesAutoresizingMaskIntoConstraints = true // TODO: // warnings, fixed constraints by ib
-    self.configDefaultSettingWithType(.dpDraggableRect)
+    super.init(coder: aDecoder)
   }
   
-  public init() {
-    super.init(frame: CGRect.zero)
+  override open func awakeFromNib() {
+    translatesAutoresizingMaskIntoConstraints = true
+    super.awakeFromNib()
+    configDefaultSettingWithType(.rect)
   }
-  
+
   public init(frame: CGRect,
               draggableButtonType: DPDraggableButtonType) {
     super.init(frame: frame)
@@ -94,30 +64,29 @@ open class DPDraggableButton: UIButton {
     self.configDefaultSettingWithType(draggableButtonType)
   }
   
-  public init(view: AnyObject, frame: CGRect,
-              draggableButtonType: DPDraggableButtonType) {
+  public init(view: AnyObject, frame: CGRect, type: DPDraggableButtonType) {
     super.init(frame: frame)
     view.addSubview(self)
-    self.configDefaultSettingWithType(draggableButtonType)
+    configDefaultSettingWithType(type)
   }
   
   open func addButtonToKeyWindow() {
     if let keyWindow = UIApplication.shared.keyWindow {
       keyWindow.addSubview(self)
-    } else if (UIApplication.shared.windows.first != nil) {
+    } else {
       UIApplication.shared.windows.first?.addSubview(self)
     }
   }
   
-  fileprivate func configDefaultSettingWithType(_ type: DPDraggableButtonType) {
+  private func configDefaultSettingWithType(_ type: DPDraggableButtonType) {
     // type
-    self.draggableButtonType = type
+    draggableButtonType = type
     
     // shape
     switch (type) {
-    case .dpDraggableRect:
+    case .rect:
       break
-    case .dpDraggableRound:
+    case .round:
       self.layer.cornerRadius = self.frame.size.height / 2.0
       self.layer.borderColor = UIColor.lightGray.cgColor
       self.layer.borderWidth = 0.5
@@ -125,21 +94,17 @@ open class DPDraggableButton: UIButton {
     }
     
     // gestures
-    self.longPressGestureRecognizer = UILongPressGestureRecognizer.init()
-    if let longPressGestureRecognizer = self.longPressGestureRecognizer {
-      longPressGestureRecognizer.addTarget(self, action:#selector(longPressHandler(_:)) )
-      longPressGestureRecognizer.allowableMovement = 0
-      self.addGestureRecognizer(longPressGestureRecognizer)
-    }
+    longPressGestureRecognizer = UILongPressGestureRecognizer()
+    longPressGestureRecognizer?.addTarget(self, action:#selector(longPressHandler(_:)) )
+    longPressGestureRecognizer?.allowableMovement = 0
+    addGestureRecognizer(longPressGestureRecognizer!)
   }
   
   // MARK: Gestures Handler
-  func longPressHandler(_ gesture: UILongPressGestureRecognizer) {
+  @objc func longPressHandler(_ gesture: UILongPressGestureRecognizer) {
     switch gesture.state {
     case .began:
-      if let longPressBlock = self.longPressBlock {
-        longPressBlock()
-      }
+      longPressBlock?()
       break
     default:
       break
@@ -147,127 +112,124 @@ open class DPDraggableButton: UIButton {
   }
   
   // MARK: Actions
-  func tapAction(_ sender: AnyObject) {
-    let delayInSeconds: Double = (self.doubleTapBlock != nil ? kDPDoubleTapTimeInterval : 0)
-    let popTime: DispatchTime = DispatchTime.now() + Double((Int64)(delayInSeconds * (Double)(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
-    DispatchQueue.main.asyncAfter(deadline: popTime) {
-      if let tapBlock = self.tapBlock {
-        if (!self.singleTapBeenCanceled
-          && !self.dragging) {
-          tapBlock();
-        }
+  @objc func tapAction(_ sender: AnyObject) {
+    let delayInSeconds: Double = (doubleTapBlock != nil ? kDPDoubleTapTimeInterval : 0)
+    let popTime: DispatchTime = DispatchTime.now()
+      + Double((Int64)(delayInSeconds * (Double)(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+    DispatchQueue.main.asyncAfter(deadline: popTime) { [weak self] in
+      guard let strongSelf = self else { return }
+      if let tapBlock = strongSelf.tapBlock,
+        !strongSelf.singleTapBeenCanceled,
+        !strongSelf.dragging {
+        tapBlock()
       }
     }
   }
   
   // MARK: Touch
-  open override func touchesBegan(_ touches: Set<UITouch>,
-                                    with event: UIEvent?) {
+  open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     self.dragging = false
     super.touchesBegan(touches, with: event)
-    let touch: UITouch? = (touches as NSSet).anyObject() as? UITouch
-    if touch?.tapCount == 2 {
-      self.doubleTapBlock?()
-      self.singleTapBeenCanceled = true
+    guard let touch = touches.randomElement() else { return }
+    if touch.tapCount == 2 {
+      doubleTapBlock?()
+      singleTapBeenCanceled = true
     } else {
-      self.singleTapBeenCanceled = false
+      singleTapBeenCanceled = false
     }
-    self.beginLocation = ((touches as NSSet).anyObject() as? UITouch)?.location(in: self)
+    beginLocation = touch.location(in: self)
   }
   
-  open override func touchesMoved(_ touches: Set<UITouch>,
-                                    with event: UIEvent?) {
-    if self.draggable  {
-      self.dragging = true
-      let touch: UITouch? = (touches as NSSet).anyObject() as? UITouch
-      let currentLocation: CGPoint? = touch?.location(in: self)
+  open override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+    guard let touch = touches.randomElement(),
+      let beginLocation = beginLocation,
+      let superviewFrame = self.superview?.frame,
+      draggable else { return }
+    
+      dragging = true
+      let currentLocation = touch.location(in: self)
       
-      let offsetX: CGFloat? = (currentLocation?.x)! - (self.beginLocation?.x)!
-      let offsetY: CGFloat? = (currentLocation?.y)! - (self.beginLocation?.y)!
-      self.center = CGPoint(x: self.center.x + offsetX!, y: self.center.y + offsetY!)
+      let offsetX = currentLocation.x - beginLocation.x
+      let offsetY = currentLocation.y - beginLocation.y
+      center = CGPoint(x: center.x + offsetX, y: center.y + offsetY)
       
-      let superviewFrame: CGRect? = self.superview?.frame
       let frame: CGRect = self.frame
       let leftLimitX: CGFloat = frame.size.width / 2.0
-      let rightLimitX: CGFloat? = (superviewFrame?.size.width)! - leftLimitX
+      let rightLimitX: CGFloat = superviewFrame.size.width - leftLimitX
       let topLimitY: CGFloat = frame.size.height / 2.0
-      let bottomLimitY: CGFloat? = (superviewFrame?.size.height)! - topLimitY
+      let bottomLimitY: CGFloat = superviewFrame.size.height - topLimitY
       
-      if (self.center.x > rightLimitX) {
-        self.center = CGPoint(x: rightLimitX!, y: self.center.y)
-      } else if (self.center.x <= leftLimitX) {
-        self.center = CGPoint(x: leftLimitX, y: self.center.y)
+      if center.x > rightLimitX {
+        center = CGPoint(x: rightLimitX, y: center.y)
+      } else if (center.x <= leftLimitX) {
+        center = CGPoint(x: leftLimitX, y: center.y)
       }
       
-      if (self.center.y > bottomLimitY) {
-        self.center = CGPoint(x: self.center.x, y: bottomLimitY!)
-      } else if (self.center.y <= topLimitY) {
-        self.center = CGPoint(x: self.center.x, y: topLimitY)
+      if center.y > bottomLimitY {
+        center = CGPoint(x: center.x, y: bottomLimitY)
+      } else if (center.y <= topLimitY) {
+        center = CGPoint(x: center.x, y: topLimitY)
       }
-      
-      self.draggingBlock?()
-    }
+      draggingBlock?()
   }
   
-  open override func touchesEnded(_ touches: Set<UITouch>,
-                                    with event: UIEvent?) {
+  open override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
     super.touchesEnded(touches, with: event)
     
-    if (self.dragging && self.dragDoneBlock != nil) {
-      self.dragDoneBlock!()
-      self.singleTapBeenCanceled = true;
+    if dragging, dragDoneBlock != nil {
+      dragDoneBlock!()
+      singleTapBeenCanceled = true
     }
-    if (self.dragging && self.autoDocking) {
-      let superviewFrame: CGRect? = self.superview?.frame
+    if dragging, autoDocking, let superviewFrame = self.superview?.frame {
       let frame: CGRect = self.frame
-      let middleX: CGFloat? = (superviewFrame?.size.width)! / 2.0
-      if (self.center.x >= middleX!) {
+      let middleX = superviewFrame.size.width / 2.0
+      
+      if self.center.x >= middleX {
         UIView.animate(withDuration: kDPAutoDockingDuration,
-                                   animations: {
-                                    self.center = CGPoint(x: (superviewFrame?.size.width)! - frame.size.width / 2.0, y: self.center.y)
-                                    self.autoDockingBlock?()
-          },
-                                   completion: { (finished) in
-                                    self.autoDockingDoneBlock?()
+                       animations: { [weak self] in
+                        guard let strongSelf = self else { return }
+                        strongSelf.center = CGPoint(x: superviewFrame.size.width - frame.size.width / 2.0,
+                                                    y: strongSelf.center.y)
+                        strongSelf.autoDockingBlock?()
+        },
+                       completion: {  [weak self] finished in
+                        guard let strongSelf = self else { return }
+                        strongSelf.autoDockingDoneBlock?()
         })
       } else {
         UIView.animate(withDuration: kDPAutoDockingDuration,
-                                   animations: {
-                                    self.center = CGPoint(x: frame.size.width / 2, y: self.center.y)
-                                    self.autoDockingBlock?()
-          },
-                                   completion: { (finished) in
-                                    self.autoDockingDoneBlock?()
+                       animations: { [weak self] in
+                        guard let strongSelf = self else { return }
+                        strongSelf.center = CGPoint(x: frame.size.width / 2, y: strongSelf.center.y)
+                        strongSelf.autoDockingBlock?()
+        },
+                       completion: {  [weak self] finished in
+                        guard let strongSelf = self else { return }
+                        strongSelf.autoDockingDoneBlock?()
         })
       }
     }
-    self.dragging = false
+    dragging = false
   }
   
-  open override func touchesCancelled(_ touches: Set<UITouch>,
-                                        with event: UIEvent?) {
-    self.dragging = false
+  open override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+    dragging = false
     super.touchesCancelled(touches, with:event)
   }
   
   // MARK: Remove
   class func removeAllFromKeyWindow() {
-    if let subviews = UIApplication.shared.keyWindow?.subviews {
-      for view: AnyObject in subviews {
-        if view.isKind(of: DPDraggableButton.self) {
-          view.removeFromSuperview()
-        }
-      }
+    guard let subviews = UIApplication.shared.keyWindow?.subviews else { return }
+    for case let button as DPDraggableButton in subviews {
+      button.removeFromSuperview()
     }
   }
   
   class func removeAllFromView(_ superView : AnyObject) {
-    if let subviews = superView.subviews {
-      for view: AnyObject in subviews {
-        if view.isKind(of: DPDraggableButton.self) {
-          view.removeFromSuperview()
-        }
-      }
+    guard let subviews = superView.subviews else { return }
+    for case let button as DPDraggableButton in subviews {
+      button.removeFromSuperview()
     }
   }
+  
 }

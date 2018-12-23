@@ -13,89 +13,70 @@ class ViewController: UIViewController {
   
   @IBOutlet var consoleLabel: UILabel!
   @IBOutlet var logSwitch: UISwitch!
+  @IBOutlet var draggableButton: DPDraggableButton!
   
-  var logInfo: String = "Log:"
-  var draggableButton: DPDraggableButton!
+  private var logInfo: String = "Log:"
 
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    UIApplication.shared.keyWindow?.bringSubview(toFront: self.draggableButton)
+    UIApplication.shared.keyWindow?.bringSubviewToFront(draggableButton)
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.draggableButton = DPDraggableButton.init(frame: CGRect(x: 0, y: 120, width: 100, height: 40),
-                                                  draggableButtonType: .dpDraggableRect)
-    self.draggableButton.backgroundColor = UIColor.gray
-    self.draggableButton.setTitleColor(UIColor.white, for: UIControlState())
-    self.draggableButton.setTitle("drag me", for: UIControlState())
     
-    self.draggableButton.tapBlock = {
+    draggableButton.tapBlock = {
       [weak self] in
-      if let this = self {
-        this.refreshLog("[single tap]")
-      }
+      guard let strongSelf = self else { return }
+      strongSelf.refreshLog("[single tap]")
     }
     
-    self.draggableButton.doubleTapBlock = {
+    draggableButton.doubleTapBlock = {
       [weak self] in
-      if let this = self {
-        this.refreshLog("[double tap]")
-      }
+      guard let strongSelf = self else { return }
+      strongSelf.refreshLog("[double tap]")
     }
     
-    self.draggableButton.longPressBlock = {
+    draggableButton.longPressBlock = {
       [weak self] in
-      if let this = self {
-        this.refreshLog("[longpress]")
-      }
+      guard let strongSelf = self else { return }
+      strongSelf.refreshLog("[longpress]")
     }
     
-    self.draggableButton.draggingBlock = {
+    draggableButton.draggingBlock = {
       [weak self] in
-      if let this = self {
-        this.refreshLog("[dragging]")
-      }
+      guard let strongSelf = self else { return }
+      strongSelf.refreshLog("[dragging]")
     }
     
-    self.draggableButton.dragDoneBlock = {
+    draggableButton.dragDoneBlock = {
       [weak self] in
-      if let this = self {
-        this.refreshLog("[drag done]")
-      }
+      guard let strongSelf = self else { return }
+      strongSelf.refreshLog("[drag done]")
     }
     
-    self.draggableButton.autoDockingBlock = {
+    draggableButton.autoDockingBlock = {
       [weak self] in
-      if let this = self {
-        this.refreshLog("[auto docking]")
-      }
+      guard let strongSelf = self else { return }
+      strongSelf.refreshLog("[auto docking]")
     }
     
-    self.draggableButton.autoDockingDoneBlock = {
+    draggableButton.autoDockingDoneBlock = {
       [weak self] in
-      if let this = self {
-        this.refreshLog("[auto docking done]")
-      }
+      guard let strongSelf = self else { return }
+      strongSelf.refreshLog("[auto docking done]")
     }
   }
   
   @IBAction func cleanLogs(_ sender: AnyObject) {
-    self.logInfo = "Log: "
-    self.consoleLabel.text = self.logInfo
+    logInfo = "Log: "
+    consoleLabel.text = logInfo
   }
 
-  func refreshLog(_ logInfo: String) {
-    if logSwitch.isOn {
-      self.logInfo += logInfo
-      self.consoleLabel.text = self.logInfo
-    }
-  }
-  
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
+  func refreshLog(_ info: String) {
+    guard logSwitch.isOn else { return }
+    logInfo += info
+    consoleLabel.text = logInfo
   }
   
 }
-
