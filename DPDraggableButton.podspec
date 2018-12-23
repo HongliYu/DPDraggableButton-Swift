@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "DPDraggableButton"
-  s.version      = "0.0.1"
+  s.version      = "0.0.2"
   s.summary      = "Draggable Button"
 
   s.description  = <<-DESC
@@ -19,13 +19,14 @@ Pod::Spec.new do |s|
   s.homepage     = "https://github.com/HongliYu/DPDraggableButton-Swift"
   s.license      = "MIT"
   s.author       = { "HongliYu" => "yhlssdone@gmail.com" }
-  s.source       = { :git => "https://github.com/HongliYu/DPDraggableButton-Swift.git", :tag => "0.0.1" }
+  s.source       = { :git => "https://github.com/HongliYu/DPDraggableButton-Swift.git", :tag => "0.0.2" }
 
-  s.platform     = :ios, "9.0"
+  s.platform     = :ios, "10.0"
   s.requires_arc = true
-  s.source_files = "DPDraggableButton/*.swift"
+  s.source_files = "DPDraggableButtonDemo/DPDraggableButtonDemo/DPDraggableButton/*.swift"  
   s.frameworks   = 'UIKit', 'Foundation'
   s.module_name  = 'DPDraggableButton'
+  s.swift_version = "4.2"
 
 end
 
