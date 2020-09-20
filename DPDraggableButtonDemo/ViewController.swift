@@ -9,12 +9,10 @@
 import UIKit
 
 class ViewController: UIViewController {
-
   
   @IBOutlet var consoleLabel: UILabel!
   @IBOutlet var logSwitch: UISwitch!
   @IBOutlet var draggableButton: DPDraggableButton!
-  
   private var logInfo: String = "Log:"
 
   override func viewDidAppear(_ animated: Bool) {
@@ -71,6 +69,19 @@ class ViewController: UIViewController {
   @IBAction func cleanLogs(_ sender: AnyObject) {
     logInfo = "Log: "
     consoleLabel.text = logInfo
+  }
+
+  @IBAction func removeDraggableButtons(_ sender: Any) {
+    DPDraggableButton.removeAllFromKeyWindow()
+  }
+
+  @IBAction func addDraggableButton(_ sender: Any) {
+    let button = DPDraggableButton(frame: CGRect(x: 0, y: 300, width: 100, height: 30),
+                                   draggableButtonType: .round)
+    button.setTitle("New Button", for: .normal)
+    button.titleLabel?.textColor = .white
+    button.titleLabel?.font = UIFont.systemFont(ofSize: 16.0)
+    button.backgroundColor = .systemGreen
   }
 
   func refreshLog(_ info: String) {

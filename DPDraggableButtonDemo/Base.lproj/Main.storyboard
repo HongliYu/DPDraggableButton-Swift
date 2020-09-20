@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,7 +21,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log:" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="so9-cT-9Vn">
-                                <rect key="frame" x="8" y="94" width="359" height="20"/>
+                                <rect key="frame" x="8" y="74" width="359" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="mWy-Fs-WqN"/>
                                 </constraints>
@@ -30,27 +29,25 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Output Log：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rpv-Bp-JuJ">
-                                <rect key="frame" x="8" y="28" width="100" height="20"/>
+                                <rect key="frame" x="8" y="8" width="98" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="KG7-ew-wtE"/>
-                                    <constraint firstAttribute="width" constant="100" id="PN1-Po-3NQ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" systemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Lce-n2-uH1">
-                                <rect key="frame" x="116" y="22" width="51" height="31"/>
+                                <rect key="frame" x="114" y="2" width="51" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="7jz-PP-Mb3"/>
                                     <constraint firstAttribute="width" constant="49" id="YwG-uE-rhw"/>
                                 </constraints>
                             </switch>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ErT-Bx-Nb4">
-                                <rect key="frame" x="8" y="56" width="54" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ErT-Bx-Nb4">
+                                <rect key="frame" x="8" y="36" width="42" height="30"/>
                                 <color key="backgroundColor" red="1" green="0.77197693349999996" blue="0.44710898529999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="54" id="84z-AO-4Mu"/>
                                     <constraint firstAttribute="height" constant="30" id="9sq-HQ-A12"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -61,8 +58,35 @@
                                     <action selector="cleanLogs:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ayh-5x-xIu"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BDF-hj-wzC" customClass="DPDraggableButton" customModule="DPDraggableButtonDemo" customModuleProvider="target">
-                                <rect key="frame" x="2" y="138" width="80" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UPI-4j-9XK">
+                                <rect key="frame" x="66" y="36" width="118" height="30"/>
+                                <color key="backgroundColor" systemColor="systemRedColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="0B6-Et-mG6"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="Remove buttons">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="removeDraggableButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EaV-9l-w2F"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EE1-nQ-RkH">
+                                <rect key="frame" x="200" y="36" width="77" height="30"/>
+                                <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="lLq-Ao-40A"/>
+                                </constraints>
+                                <state key="normal" title="Add button">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="addDraggableButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cZq-ul-omO"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BDF-hj-wzC" customClass="DPDraggableButton" customModule="DPDraggableButtonDemo" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="283" width="59" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Drag Me">
@@ -74,12 +98,18 @@
                         <constraints>
                             <constraint firstItem="rpv-Bp-JuJ" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="H30-6w-glU"/>
                             <constraint firstItem="so9-cT-9Vn" firstAttribute="top" secondItem="ErT-Bx-Nb4" secondAttribute="bottom" constant="8" id="HXv-2b-Q0n"/>
+                            <constraint firstItem="EE1-nQ-RkH" firstAttribute="centerY" secondItem="ErT-Bx-Nb4" secondAttribute="centerY" id="Hgo-up-5CG"/>
+                            <constraint firstItem="UPI-4j-9XK" firstAttribute="leading" secondItem="ErT-Bx-Nb4" secondAttribute="trailing" constant="16" id="JB8-MQ-Pp0"/>
+                            <constraint firstItem="UPI-4j-9XK" firstAttribute="centerY" secondItem="ErT-Bx-Nb4" secondAttribute="centerY" id="RnP-Fz-S8o"/>
                             <constraint firstItem="ErT-Bx-Nb4" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="8" id="UZT-An-8vC"/>
+                            <constraint firstItem="EE1-nQ-RkH" firstAttribute="leading" secondItem="UPI-4j-9XK" secondAttribute="trailing" constant="16" id="V9x-oB-Uxv"/>
                             <constraint firstItem="so9-cT-9Vn" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="8" id="VTc-D8-HxI"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="UPI-4j-9XK" secondAttribute="trailing" constant="20" symbolic="YES" id="aRz-w1-YhK"/>
                             <constraint firstItem="rpv-Bp-JuJ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="8" id="cbp-ED-iIA"/>
                             <constraint firstItem="ErT-Bx-Nb4" firstAttribute="top" secondItem="rpv-Bp-JuJ" secondAttribute="bottom" constant="8" id="cx7-HQ-C6I"/>
                             <constraint firstAttribute="trailing" secondItem="so9-cT-9Vn" secondAttribute="trailing" constant="8" id="dFz-ng-Iqn"/>
                             <constraint firstItem="Lce-n2-uH1" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="2" id="g8L-aN-AKl"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="EE1-nQ-RkH" secondAttribute="trailing" constant="20" symbolic="YES" id="iWZ-e3-UIl"/>
                             <constraint firstItem="Lce-n2-uH1" firstAttribute="leading" secondItem="rpv-Bp-JuJ" secondAttribute="trailing" constant="8" id="xEg-bv-32R"/>
                         </constraints>
                     </view>
@@ -94,4 +124,15 @@
             <point key="canvasLocation" x="320.80000000000001" y="348.57571214392806"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="darkTextColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>
