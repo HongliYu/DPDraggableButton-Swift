@@ -3,6 +3,8 @@ Drag or tap the button to trigger Gesture event
 
 [![Cocoapods](https://img.shields.io/cocoapods/v/DPDraggableButton.svg)](http://cocoapods.org/?q=DPDraggableButton)
 [![Pod License](http://img.shields.io/cocoapods/l/DPDraggableButton.svg)](https://github.com/HongliYu/DPDraggableButton-Swift/blob/master/LICENSE)
+[![Swift-5.3](https://img.shields.io/badge/Swift-5.3-blue.svg)]()
+[![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 ![screenshot](https://github.com/HongliYu/DPDraggableButton-Swift/blob/master/DPDraggableButton.gif?raw=true)
 
