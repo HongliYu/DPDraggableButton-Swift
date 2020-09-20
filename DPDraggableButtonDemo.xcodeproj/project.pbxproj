@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F72B831F1D5CAD1F0054AE40 /* DPDraggableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72B831E1D5CAD1F0054AE40 /* DPDraggableButton.swift */; };
 		F730EAFD1D59C5980053B5BF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F730EAFC1D59C5980053B5BF /* AppDelegate.swift */; };
 		F730EAFF1D59C5980053B5BF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F730EAFE1D59C5980053B5BF /* ViewController.swift */; };
 		F730EB021D59C5980053B5BF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F730EB001D59C5980053B5BF /* Main.storyboard */; };
@@ -16,7 +15,7 @@
 		F78D0AFF21CF61860075D189 /* DPDraggableButton.h in Headers */ = {isa = PBXBuildFile; fileRef = F78D0AFD21CF61860075D189 /* DPDraggableButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F78D0B0221CF61860075D189 /* DPDraggableButton.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78D0AFB21CF61860075D189 /* DPDraggableButton.framework */; };
 		F78D0B0321CF61860075D189 /* DPDraggableButton.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F78D0AFB21CF61860075D189 /* DPDraggableButton.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		F78D0B0821CF61AC0075D189 /* DPDraggableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72B831E1D5CAD1F0054AE40 /* DPDraggableButton.swift */; };
+		F791CB6D25174F0F0015752F /* DPDraggableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F791CB6C25174F0F0015752F /* DPDraggableButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,7 +43,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		F72B831E1D5CAD1F0054AE40 /* DPDraggableButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DPDraggableButton.swift; sourceTree = "<group>"; };
 		F730EAF91D59C5980053B5BF /* DPDraggableButtonDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DPDraggableButtonDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F730EAFC1D59C5980053B5BF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F730EAFE1D59C5980053B5BF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -55,6 +53,7 @@
 		F78D0AFB21CF61860075D189 /* DPDraggableButton.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DPDraggableButton.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F78D0AFD21CF61860075D189 /* DPDraggableButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DPDraggableButton.h; sourceTree = "<group>"; };
 		F78D0AFE21CF61860075D189 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F791CB6C25174F0F0015752F /* DPDraggableButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DPDraggableButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,14 +75,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		F72B831D1D5CAD1F0054AE40 /* DPDraggableButton */ = {
-			isa = PBXGroup;
-			children = (
-				F72B831E1D5CAD1F0054AE40 /* DPDraggableButton.swift */,
-			);
-			path = DPDraggableButton;
-			sourceTree = "<group>";
-		};
 		F730EAF01D59C5980053B5BF = {
 			isa = PBXGroup;
 			children = (
@@ -105,7 +96,7 @@
 		F730EAFB1D59C5980053B5BF /* DPDraggableButtonDemo */ = {
 			isa = PBXGroup;
 			children = (
-				F72B831D1D5CAD1F0054AE40 /* DPDraggableButton */,
+				F791CB6B25174F0F0015752F /* DPDraggableButton-Swift */,
 				F730EAFC1D59C5980053B5BF /* AppDelegate.swift */,
 				F730EAFE1D59C5980053B5BF /* ViewController.swift */,
 				F730EB001D59C5980053B5BF /* Main.storyboard */,
@@ -124,6 +115,15 @@
 			);
 			path = DPDraggableButton;
 			sourceTree = "<group>";
+		};
+		F791CB6B25174F0F0015752F /* DPDraggableButton-Swift */ = {
+			isa = PBXGroup;
+			children = (
+				F791CB6C25174F0F0015752F /* DPDraggableButton.swift */,
+			);
+			name = "DPDraggableButton-Swift";
+			path = "Sources/DPDraggableButton-Swift";
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -245,7 +245,7 @@
 			files = (
 				F730EAFF1D59C5980053B5BF /* ViewController.swift in Sources */,
 				F730EAFD1D59C5980053B5BF /* AppDelegate.swift in Sources */,
-				F72B831F1D5CAD1F0054AE40 /* DPDraggableButton.swift in Sources */,
+				F791CB6D25174F0F0015752F /* DPDraggableButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,7 +253,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F78D0B0821CF61AC0075D189 /* DPDraggableButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -398,7 +397,6 @@
 		F730EB0C1D59C5980053B5BF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = FC9QT6TC28;
@@ -413,7 +411,6 @@
 		F730EB0D1D59C5980053B5BF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = FC9QT6TC28;
