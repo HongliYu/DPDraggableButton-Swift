@@ -6,7 +6,7 @@ Drag or tap the button to trigger Gesture event
 [![Swift-5.3](https://img.shields.io/badge/Swift-5.3-blue.svg)]()
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
-![screenshot](https://github.com/HongliYu/DPDraggableButton-Swift/blob/master/DPDraggableButton.gif?raw=true)
+<img src="https://github.com/HongliYu/DPDraggableButton-Swift/blob/master/DPDraggableButton.gif?raw=true" alt="alt text"  height="400">
 
 # Usage
 
