@@ -22,6 +22,9 @@ open class DPDraggableButton: UIButton {
   open var dragging = false
   open var autoDocking = true
   open var singleTapBeenCanceled = false
+  open var upperBoundsDistance: CGFloat = 120
+  private(set) var rangeOutOfUpperBounds = false
+
   open var draggableButtonType = DPDraggableButtonType.rect
   
   open var beginLocation: CGPoint?
@@ -151,10 +154,14 @@ open class DPDraggableButton: UIButton {
           let beginLocation = beginLocation,
           let superviewFrame = self.superview?.frame,
           draggable else { return }
-    
     dragging = true
-    let currentLocation = touch.location(in: self)
 
+    guard self.frame.origin.y > upperBoundsDistance else {
+      rangeOutOfUpperBounds = true
+      return
+    }
+
+    let currentLocation = touch.location(in: self)
     let offsetX = currentLocation.x - beginLocation.x
     let offsetY = currentLocation.y - beginLocation.y
     center = CGPoint(x: center.x + offsetX, y: center.y + offsetY)
@@ -181,7 +188,7 @@ open class DPDraggableButton: UIButton {
   
   open override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
     super.touchesEnded(touches, with: event)
-    
+
     if dragging, dragDoneBlock != nil {
       dragDoneBlock?()
       singleTapBeenCanceled = true
@@ -212,6 +219,10 @@ open class DPDraggableButton: UIButton {
           strongSelf.autoDockingDoneBlock?()
         })
       }
+    }
+    if rangeOutOfUpperBounds {
+      rangeOutOfUpperBounds.toggle()
+      frame.origin.y = upperBoundsDistance + 0.5
     }
     dragging = false
   }
